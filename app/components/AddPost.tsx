@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
+  let toastPostID: string;
 
   //Create a post
   const mutation = useMutation({
@@ -15,10 +17,13 @@ export default function CreatePost() {
     },
 
     onError: (error) => {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data.message, { id: "logout" });
+      }
+      setIsDisabled(false);
     },
     onSuccess: (data) => {
-      console.log(data);
+      toast.success("Post has been made 🔥", { id: "logout" });
       setTitle("");
       setIsDisabled(false);
     },
@@ -26,6 +31,8 @@ export default function CreatePost() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    toastPostID = toast.loading("Creating your post", { id: "logout" });
+    setIsDisabled(true);
     mutation.mutate(title);
   };
 

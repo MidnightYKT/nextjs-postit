@@ -2,6 +2,7 @@
 import axios from "axios";
 import CreatePost from "./components/AddPost";
 import { useQuery } from "@tanstack/react-query";
+import Post from "./components/Post";
 
 //Fetch all posts
 const allPosts = async () => {
@@ -21,6 +22,15 @@ export default function Home() {
   return (
     <main>
       <CreatePost />
+      {data?.map((post) => (
+        <Post
+          key={post.id}
+          name={post.name}
+          avatar={post.user.image}
+          postTitle={post.title}
+          id={post.id}
+        />
+      ))}
     </main>
   );
 }

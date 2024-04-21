@@ -6,6 +6,7 @@ import { PostType } from "@/app/types/Post";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
+import moment from "moment";
 
 type URL = {
   params: {
@@ -24,29 +25,30 @@ export default function PostDetail(url: URL) {
     queryFn: () => fetchDetails(url.params.slug),
   });
   if (isLoading) return "Loading...";
-  console.log(data);
 
   return (
     <div>
       <Post
         id={data.id}
-        user={data.user.name}
+        user={data.user}
         avatar={data.user.image}
         postTitle={data.title}
         comments={data.comments}
       />
       <AddComment id={data.id} />
       {data?.comments?.map((comment) => (
-        <div key={comment.id} className="my-6 bg-white p-8 rounded-md">
-          <div className="flex items-center gap-2">
-            <Image
-              width={24}
-              height={24}
-              src={comment.user?.image}
-              alt="avatar"
-            />
-            <h3>{comment?.user?.name}</h3>
-            <h3>{comment?.createdAt}</h3>
+        <div key={comment.id} className="my-6 bg-white p-3 lg:p-8 rounded-md">
+          <div className="flex justify-between items-center gap-2">
+            <div className="flex">
+              <Image
+                width={24}
+                height={24}
+                src={comment.user?.image}
+                alt="avatar"
+              />
+              <h3 className="ml-2">{comment?.user?.name}</h3>
+            </div>
+            <h3>{moment(comment?.createdAt).format("LLL")}</h3>
           </div>
           <div className="py-4">{comment.title}</div>
         </div>

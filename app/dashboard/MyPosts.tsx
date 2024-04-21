@@ -11,7 +11,7 @@ const fetchAuthPosts = async () => {
   return response.data;
 };
 
-export default function MyPosts({ session }) {
+export default function MyPosts({ session }: any) {
   const { data, isLoading } = useQuery<AuthPosts>({
     queryFn: fetchAuthPosts,
     queryKey: ["auth-posts"],

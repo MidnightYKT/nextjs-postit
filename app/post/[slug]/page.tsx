@@ -1,5 +1,6 @@
 "use client";
 
+import AddComment from "@/app/components/AddComment";
 import Post from "@/app/components/Post";
 import { PostType } from "@/app/types/Post";
 import { useQuery } from "@tanstack/react-query";
@@ -33,6 +34,7 @@ export default function PostDetail(url: URL) {
         postTitle={data.title}
         comments={data.comments}
       />
+      <AddComment id={data.id} />
     </div>
   );
 }

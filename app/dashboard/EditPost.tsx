@@ -49,9 +49,9 @@ export default function EditPost({ avatar, name, title, comments, id }) {
   return (
     <>
       <div className="bg-white my-8 p-8 rounded-lg">
-        <div>
+        <div className="flex">
           <Image width={32} height={32} src={avatar} alt="avatar" />
-          <h3 className="font-bold text-gray-700">{name}</h3>
+          <h3 className="font-bold text-gray-700 ml-2 mt-1">{name}</h3>
         </div>
         <div className="my-8">
           <h3 className="break-all">{title}</h3>

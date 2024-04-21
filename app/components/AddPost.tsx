@@ -25,7 +25,7 @@ export default function CreatePost() {
     },
     onSuccess: (data) => {
       toast.success("Post has been made 🔥", { id: "logout" });
-      queryClient.invalidateQueries(["Posts"]);
+      queryClient.invalidateQueries({ queryKey: ["Posts"] });
       setTitle("");
       setIsDisabled(false);
     },

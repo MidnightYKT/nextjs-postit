@@ -24,7 +24,6 @@ export default function AddComment({ id }: PostProps) {
   //Create a post
   const mutation = useMutation({
     mutationFn: async (data: Comment) => {
-      console.log(data, "data");
       await axios.post("/api/posts/addComment", { data });
     },
 
@@ -36,7 +35,7 @@ export default function AddComment({ id }: PostProps) {
     },
     onSuccess: (data) => {
       toast.success("Added your comment 🔥", { id: "logout" });
-      queryClient.invalidateQueries(["Add-comment"]);
+      queryClient.invalidateQueries({ queryKey: ["Comment"] });
       setTitle("");
       setIsDisabled(false);
     },

@@ -7,19 +7,21 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getServerSession(req, res, authOptions);
-  if (!session) {
-    return res
-      .status(401)
-      .json({ message: "Please signin to post a comment." });
-  }
-  //Get User
-  const prismaUser = await prisma.user.findUnique({
-    where: { email: session?.user?.email },
-  });
   if (req.method === "POST") {
-    const { title, postId } = req.body.data;
-    console.log(title, postId);
+    const title: string = req.body.data.title;
+    const postId: string = req.body.data.postId;
+
+    const session = await getServerSession(req, res, authOptions);
+    if (!session) {
+      return res
+        .status(401)
+        .json({ message: "Please signin to post a comment." });
+    }
+    //Get User
+    const prismaUser = await prisma.user.findUnique({
+      where: { email: session?.user?.email },
+    });
+
     if (!title.length) {
       return res.status(401).json({ message: "Please enter some text" });
     }

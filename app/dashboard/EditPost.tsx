@@ -19,7 +19,13 @@ type EditProps = {
   }[];
 };
 
-export default function EditPost({ avatar, name, title, comments, id }) {
+export default function EditPost({
+  avatar,
+  name,
+  title,
+  comments,
+  id,
+}: EditProps) {
   //Toggle
   const [toggle, setToggle] = useState(false);
   let deleteToastID: string;
@@ -37,7 +43,7 @@ export default function EditPost({ avatar, name, title, comments, id }) {
     onSuccess: (data) => {
       console.log(data);
       toast.success("Error deleting that post🔥", { id: "logout" });
-      queryClient.invalidateQueries(["auth-posts"]);
+      queryClient.invalidateQueries({ queryKey: ["auth-posts"] });
     },
   });
 

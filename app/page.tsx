@@ -2,6 +2,8 @@
 import axios from "axios";
 import CreatePost from "./components/AddPost";
 import { useQuery } from "@tanstack/react-query";
+import { Flex, Spin } from "antd";
+
 import Post from "./components/Post";
 import { PostType } from "./types/Posts";
 
@@ -18,7 +20,16 @@ export default function Home() {
   });
 
   if (error) return error;
-  if (isLoading) return "Loading";
+  if (isLoading)
+    return (
+      <Flex
+        align="center"
+        gap="middle"
+        className="h-screnn flex item-center justify-center"
+      >
+        <Spin size="large" />
+      </Flex>
+    );
 
   return (
     <main>

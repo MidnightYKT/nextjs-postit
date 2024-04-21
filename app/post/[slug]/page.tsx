@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import moment from "moment";
+import { Flex, Spin } from "antd";
 
 type URL = {
   params: {
@@ -24,7 +25,16 @@ export default function PostDetail(url: URL) {
     queryKey: ["detail-post"],
     queryFn: () => fetchDetails(url.params.slug),
   });
-  if (isLoading) return "Loading...";
+  if (isLoading)
+    return (
+      <Flex
+        align="center"
+        gap="middle"
+        className="h-screnn flex item-center justify-center"
+      >
+        <Spin size="large" />
+      </Flex>
+    );
 
   return (
     <div>

@@ -4,17 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 type Posts = {
-  id: string;
-  avatar: string;
-  title: string;
-  user: {
+  id?: string;
+  avatar?: string;
+  user?: {
     name: string;
   };
-  comments: string;
-  postTitle: string;
+  postTitle?: string;
 };
 
-export default function Post({ id, avatar, user, postTitle, comments }: Posts) {
+export default function Post({ id, avatar, user, postTitle }: Posts) {
+  let img: string = avatar || "";
+
   return (
     <div className="bg-white my-8 p-8 rounded-lg">
       <div className="flex items-center gap-2">
@@ -22,10 +22,10 @@ export default function Post({ id, avatar, user, postTitle, comments }: Posts) {
           className=" rounded-full"
           width={32}
           height={32}
-          src={avatar}
+          src={img}
           alt="avatar"
         />
-        <h3 className="font-bold text-gray-700">{user.name}</h3>
+        <h3 className="font-bold text-gray-700">{user?.name}</h3>
       </div>
       <div className="my-8">
         <p className=" break-all">{postTitle}</p>
@@ -33,7 +33,7 @@ export default function Post({ id, avatar, user, postTitle, comments }: Posts) {
       <div className="flex gap-4 cursor-pointer items-center">
         <Link href={`/post/${id}`}>
           <p className="text-sm font-bold text-gray-700">
-            {comments?.length} Comment
+            {/* {comments?.comments.length} Comment */} Comment
           </p>
         </Link>
       </div>

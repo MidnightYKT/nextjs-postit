@@ -8,9 +8,16 @@ export type PostType = {
     image: string;
   };
   comments: {
-    createAt: string;
+    createdAt?: string;
     id: string;
     postId: string;
+    title: string;
     userId: string;
-  };
+    user: {
+      email: string;
+      id: string;
+      image: string;
+      name: string;
+    };
+  }[];
 };

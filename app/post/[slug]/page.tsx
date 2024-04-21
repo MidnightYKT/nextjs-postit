@@ -13,6 +13,7 @@ type URL = {
   params: {
     slug: string;
   };
+  searchParams: string;
 };
 
 const fetchDetails = async (slug: string) => {
@@ -21,9 +22,9 @@ const fetchDetails = async (slug: string) => {
 };
 
 export default function PostDetail(url: URL) {
-  const { data, isLoading } = useQuery<PostType[]>({
+  const { data, isLoading } = useQuery<PostType>({
+    queryKey: ["detail-post"],
     queryFn: () => fetchDetails(url.params.slug),
-    queryKey: ["Comment"],
   });
   if (isLoading)
     return (
@@ -39,14 +40,14 @@ export default function PostDetail(url: URL) {
   return (
     <div>
       <Post
-        id={data.id}
-        user={data.user}
-        avatar={data.user.image}
-        postTitle={data.title}
-        comments={data.comments}
+        id={data?.id}
+        user={data?.user}
+        avatar={data?.user?.image}
+        postTitle={data?.title}
+        // comments={data.comments}
       />
-      <AddComment id={data.id} />
-      {data?.comments?.map((comment) => (
+      <AddComment id={data?.id} />
+      {data?.comments?.map((comment: any) => (
         <div key={comment.id} className="my-6 bg-white p-3 lg:p-8 rounded-md">
           <div className="flex justify-between items-center gap-2">
             <div className="flex">

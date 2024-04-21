@@ -1,25 +1,24 @@
 export type PostType = {
-  name: string;
-  title: string;
   id: string;
-  createAt?: string;
+  title: string;
+  updatedAt?: string;
   user: {
-    name: string;
-    image: string;
     email: string;
     id: string;
+    image: string;
+    name: string;
   };
   comments: {
-    createAt: string;
+    createdAt?: string;
     id: string;
     postId: string;
-    userId: string;
     title: string;
+    userId: string;
     user: {
       email: string;
       id: string;
       image: string;
       name: string;
     };
-  };
+  }[];
 };

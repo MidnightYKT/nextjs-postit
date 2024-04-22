@@ -18,7 +18,7 @@ export default function Home() {
     queryFn: allPosts,
     queryKey: ["Posts"],
   });
-  console.log(data, "data");
+
   if (error) return error;
   if (isLoading)
     return (
@@ -41,6 +41,7 @@ export default function Home() {
           avatar={post.user.image}
           postTitle={post.title}
           id={post.id}
+          comments={post.comments}
         />
       ))}
     </main>

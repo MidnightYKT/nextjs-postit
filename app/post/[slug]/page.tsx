@@ -26,6 +26,7 @@ export default function PostDetail(url: URL) {
     queryKey: ["detail-post"],
     queryFn: () => fetchDetails(url.params.slug),
   });
+
   if (isLoading)
     return (
       <Flex
@@ -44,7 +45,7 @@ export default function PostDetail(url: URL) {
         user={data?.user}
         avatar={data?.user?.image}
         postTitle={data?.title}
-        // comments={data.comments}
+        comments={data?.comments}
       />
       <AddComment id={data?.id} />
       {data?.comments?.map((comment: any) => (

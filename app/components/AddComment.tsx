@@ -72,7 +72,7 @@ export default function AddComment({ id }: PostProps) {
           className="text-sm bg-teal-600 text-white py-2 px-6 rounded-xl disabled:opacity-25"
           type="submit"
         >
-          Create a post🚀
+          Add a comment🚀
         </button>
       </div>
     </form>
